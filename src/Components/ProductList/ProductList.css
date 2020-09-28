@@ -1,0 +1,24 @@
+.product {
+  text-align: center;
+}
+
+@media (min-width: 756px) {
+  .product {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product {
+    max-width: 756px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1440px) {
+  .product {
+    margin: 0;
+    max-width: 1440px;
+    justify-content: space-between;
+  }
+}

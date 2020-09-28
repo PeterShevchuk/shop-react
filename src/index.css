@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li {
+  list-style: none;
+}
+a {
+  color: #000000;
+}
+img {
+  display: block;
+}
+button {
+  outline: 0;
+}
+body {
+  font-family: Poppins;
+  font-size: 14px;
+  color: #000000;
+  background-color: #ffffff;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.container {
+  max-width: 320px;
+
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+@media (min-width: 756px) {
+  .mobile,
+  .laptop {
+    display: none;
+  }
+  .tablet {
+    display: inline-block;
+  }
+  .container {
+    max-width: 756px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile,
+  .tablet {
+    display: none;
+  }
+  .laptop {
+    display: inline-block;
+  }
+  .container {
+    max-width: 1440px;
+  }
+}

@@ -1,0 +1,60 @@
+.contact {
+  border-bottom: 1px solid #cccccc;
+  padding: 15px 0;
+}
+.contact__tel {
+  margin-right: 20px;
+}
+.contact i {
+  margin-right: 10px;
+}
+.contact__tel,
+.contact__mail {
+  display: inline-flex;
+  text-decoration: unset;
+}
+
+.logo {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+}
+.icons {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all 0.1s linear;
+}
+.icon--tel {
+  background-image: url("../../img/icons/tel.png");
+}
+.contact__tel:hover > .icon--tel {
+  background-image: url("../../img/icons/tel-hover.png");
+}
+.icon--email {
+  background-image: url("../../img/icons/mail.png");
+}
+.contact__mail:hover > .icon--email {
+  background-image: url("../../img/icons/mail-hover.png");
+}
+.icon--user {
+  background-image: url("../../img/icons/user.png");
+}
+.icon--user:hover {
+  background-image: url("../../img/icons/user-hover.png");
+}
+.icon--search {
+  background-image: url("../../img/icons/search.png");
+}
+.icon--search:hover {
+  background-image: url("../../img/icons/search-hover.png");
+}
+.icon--basker {
+  background-image: url("../../img/icons/basket.png");
+}
+.icon--basker:hover {
+  background-image: url("../../img/icons/basket-hover.png");
+}

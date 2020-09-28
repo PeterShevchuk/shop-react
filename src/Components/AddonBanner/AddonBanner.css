@@ -1,0 +1,41 @@
+.fashionshop {
+  background-image: url("../../img/content/fashionshopBG.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  text-align: center;
+  padding: 100px 0;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+.fashionshop p {
+  margin-bottom: 50px;
+}
+.fashionshop__title {
+  font-size: 48px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+.fashionshop__text {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  line-height: 1.2;
+}
+.fashionshop__button {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  background-color: yellow;
+  padding: 10px 15px;
+  text-decoration: unset;
+}
+.fashionshop__button:hover {
+  transform: scale(1.1);
+}
+
+@media (min-width: 1024px) {
+  .fashionshop {
+    margin-bottom: 150px;
+  }
+}

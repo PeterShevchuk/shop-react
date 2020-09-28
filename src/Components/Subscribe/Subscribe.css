@@ -1,0 +1,46 @@
+.subscribe {
+  background-color: #eeeeee;
+  padding: 30px 0;
+  text-align: center;
+}
+.subscribe__title {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.subscribe__text {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 50px;
+}
+.subscribe__email {
+  min-width: 320px;
+  border: 1px solid #000000;
+  outline: 0;
+  padding: 22px;
+}
+.subscribe__submit {
+  border: 1px solid #eaac00;
+  outline: 0;
+  background-color: #eaac00;
+  cursor: pointer;
+  padding: 20px 45px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.subscribe__submit:hover {
+  opacity: 0.8;
+}
+
+@media (min-width: 1024px) {
+  .subscribe {
+    padding: 100px 0;
+  }
+  .subscribe__title {
+    font-size: 62px;
+  }
+}
