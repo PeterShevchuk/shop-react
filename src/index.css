@@ -31,6 +31,24 @@ code {
   margin: 0 auto;
 }
 
+.btn {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 15px 20px;
+  display: inline-block;
+  letter-spacing: 5px;
+  border: 0;
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #eaac00;
+}
+
 @media (min-width: 756px) {
   .mobile,
   .laptop {

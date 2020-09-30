@@ -1,0 +1,9 @@
+.profile {
+  margin: 0 200px;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+}
+
+.profile__info > * {
+  margin-bottom: 10px;
+}

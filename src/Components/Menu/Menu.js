@@ -1,8 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { navigation } from "../../Addons/vars";
 
 import "./Menu.css";
 
 const Menu = () => {
+  const { token, user } = useSelector((state) => state.session);
   return (
     <div className="container">
       <nav className="nav">
@@ -14,44 +18,56 @@ const Menu = () => {
           <span></span>
           <ul className="nav-menu" id="menu">
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.home} exact className="nav-menu__item">
                 home
-              </a>
+              </NavLink>
             </li>
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.shop} exact className="nav-menu__item">
                 shop
-              </a>
+              </NavLink>
             </li>
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.sale} exact className="nav-menu__item">
+                Sale
+              </NavLink>
+            </li>
+            <li className="nav-menu__list">
+              <NavLink to={navigation.featured} exact className="nav-menu__item">
+                featured
+              </NavLink>
+            </li>
+            {/* <li className="nav-menu__list">
+              <NavLink to={navigation.addItem} className="nav-menu__item">
                 blog
-              </a>
-            </li>
+              </NavLink>
+            </li> */}
+            {token && user.admin && (
+              <li className="nav-menu__list">
+                <NavLink to={navigation.addItem} className="nav-menu__item">
+                  ADD
+                </NavLink>
+              </li>
+            )}
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
-                about us
-              </a>
-            </li>
-            <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.contact} className="nav-menu__item">
                 contact us
-              </a>
+              </NavLink>
             </li>
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={token ? navigation.prof : navigation.reg} className="nav-menu__item">
                 <i className="icons icon--user"> </i>
-              </a>
+              </NavLink>
             </li>
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.search} className="nav-menu__item">
                 <i className="icons icon--search"> </i>
-              </a>
+              </NavLink>
             </li>
             <li className="nav-menu__list">
-              <a href="/" className="nav-menu__item">
+              <NavLink to={navigation.cart} className="nav-menu__item">
                 <i className="icons icon--basker"></i>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>

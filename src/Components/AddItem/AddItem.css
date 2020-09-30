@@ -1,0 +1,63 @@
+.addItem {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.addItem__item {
+  text-align: right;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.addItem__item-select {
+  /* padding: 5px 10px; */
+}
+.addItem__item-select > * {
+  padding: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  /* margin-bottom: 5px; */
+}
+.addItem__item-select > *:hover {
+  background-color: khaki;
+}
+.addItem__item-poster {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addItem__label {
+  padding-right: 20px;
+}
+.addItem__input {
+  display: block;
+  padding: 10px;
+  font-size: 20px;
+}
+.addItem__input-radio,
+.addItem__input-sale {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.addItem__input-radio > label,
+.addItem__input-sale > label {
+  cursor: pointer;
+}
+.addItem__input-sale {
+  justify-content: space-between;
+  padding-left: 50px;
+}
+.addItem__submit {
+  padding: 20px;
+  font-size: 20px;
+  width: 50%;
+}
+
+.addItem__progress {
+  width: 50%;
+}

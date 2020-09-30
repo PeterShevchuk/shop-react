@@ -10,6 +10,9 @@
   text-decoration: none;
   transition: all 0.1s linear;
 }
+.nav-menu__item.active {
+  color: #eaac00;
+}
 .nav-menu__item:hover {
   color: #eaac00;
 }

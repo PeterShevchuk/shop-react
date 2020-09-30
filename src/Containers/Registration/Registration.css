@@ -1,0 +1,27 @@
+.registration {
+  text-align: center;
+}
+
+.registration__title {
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.registration__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.registration__input {
+  display: block;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 20px;
+}
+.registration__submit {
+  padding: 20px;
+  font-size: 20px;
+}

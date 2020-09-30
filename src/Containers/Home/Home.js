@@ -13,9 +13,9 @@ const Home = () => {
   return (
     <>
       <Slider />
-      <SaleProducts />
+      <SaleProducts count={4} />
       <TopSale />
-      <FeaturedProducts />
+      <FeaturedProducts count={8} />
       <AddonBanner />
       <Subscribe />
     </>

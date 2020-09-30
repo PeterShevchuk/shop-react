@@ -1,14 +1,20 @@
 import React from "react";
-import ProductList from "../ProductList/ProductList";
+import { useSelector } from "react-redux";
+
+import ProductItem from "../ProductItem/ProductItem";
+
+import { newArrayWithCount } from "../../Addons/func";
 
 import "./FeaturedProducts.css";
-const FeaturedProducts = () => {
+import { navigation } from "../../Addons/vars";
+const FeaturedProducts = ({ count = null }) => {
+  const products = useSelector((state) => state.data.items);
   return (
     <div className="container featured">
       <h2 className="featured__title">
-        <a href="/"> Featured Products </a>
+        <a href={navigation.featured}> Featured Products </a>
       </h2>
-      <ProductList />
+      <ul className="product">{products.length && newArrayWithCount(products, count).map((item) => <ProductItem {...item} key={item.id} />)}</ul>
     </div>
   );
 };
