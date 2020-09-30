@@ -1,4 +1,4 @@
-import { db, auth, userData } from "../config";
+import { db, auth, userData } from "./config";
 
 import { setToken, setUserInfo, loginOut, setItemsState, Loader } from "./Redux/Slice";
 
