@@ -10,14 +10,15 @@ import { navigation } from "../../Addons/vars";
 const SaleProducts = ({ count = null }) => {
   const products = useSelector((state) => state.data.items);
 
-  let productsFiltered = products.filter((item) => item.sale);
+  const productsFiltered = products.length ? products.filter((item) => item.sale) : [];
+  // console.log(productsFiltered);
 
   return (
     <div className="container sale">
       <h2 className="sale__title">
         <a href={navigation.sale}> Sale Products </a>
       </h2>
-      <ul className="product">{productsFiltered.length && newArrayWithCount(productsFiltered, count).map((item) => <ProductItem {...item} key={"sale" + item.id} />)}</ul>
+      <ul className="product">{productsFiltered.length > 0 && newArrayWithCount(productsFiltered, count).map((item) => <ProductItem {...item} key={"sale" + item.date} />)}</ul>
     </div>
   );
 };

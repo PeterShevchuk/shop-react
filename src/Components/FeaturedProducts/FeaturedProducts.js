@@ -14,7 +14,7 @@ const FeaturedProducts = ({ count = null }) => {
       <h2 className="featured__title">
         <a href={navigation.featured}> Featured Products </a>
       </h2>
-      <ul className="product">{products.length && newArrayWithCount(products, count).map((item) => <ProductItem {...item} key={item.id} />)}</ul>
+      <ul className="product">{products.length && newArrayWithCount(products, count).map((item) => <ProductItem {...item} key={"featured" + item.date} />)}</ul>
     </div>
   );
 };

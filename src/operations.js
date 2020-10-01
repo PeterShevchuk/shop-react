@@ -1,6 +1,6 @@
 import { db, auth, userData } from "./config";
 
-import { setToken, setUserInfo, loginOut, setItemsState, Loader } from "./Redux/Slice";
+import { setToken, setUserInfo, loginOut, setItemsState, Loader, setErrorState } from "./Redux/Slice";
 
 export const dbItems = db.collection("items");
 export const dbUsers = db.collection("users");
@@ -10,7 +10,7 @@ export const setItem = (data) => async (dispatch) => {
   try {
     await dbItems.add(data);
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }
@@ -22,7 +22,7 @@ export const getItems = () => async (dispatch) => {
     const formatResult = await result.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     dispatch(setItemsState(formatResult));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }
@@ -33,11 +33,11 @@ export const userSingUp = ({ email, password, phoneNumber, name, photoUrl }) => 
   try {
     const result = await auth.createUserWithEmailAndPassword(email, password);
     dispatch(setToken(result.user.refreshToken));
-    const newDataUserInfo = { uid: result.user.uid, email, phoneNumber, name, photoUrl, admin: false };
+    const newDataUserInfo = { uid: result.user.uid, email, phoneNumber, name, photoUrl, admin: false, date: Date.now() };
     await dbUsers.doc(result.user.uid).set(newDataUserInfo);
     dispatch(setUserInfo(newDataUserInfo));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }
@@ -51,7 +51,7 @@ export const userSingIn = (email, password) => async (dispatch) => {
     const resultUserData = await dbUsers.doc(result.user.uid).get();
     dispatch(setUserInfo(resultUserData.data()));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }
@@ -63,7 +63,7 @@ export const userSingOut = () => async (dispatch) => {
     await auth.signOut();
     dispatch(loginOut());
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }
@@ -75,7 +75,7 @@ export const getUserInfo = (uid) => async (dispatch) => {
     const resultUserData = await dbUsers.doc(uid).get();
     return resultUserData.data();
   } catch (error) {
-    console.log(error.message);
+    dispatch(setErrorState(error));
   } finally {
     dispatch(Loader(false));
   }

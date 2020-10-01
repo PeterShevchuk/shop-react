@@ -25,8 +25,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .container {
-  max-width: 320px;
-
+  /* max-width: 320px; */
   min-width: 320px;
   margin: 0 auto;
 }
@@ -47,6 +46,18 @@ code {
 
 .btn:hover {
   background-color: #eaac00;
+}
+
+.MuiBadge-root {
+  vertical-align: baseline;
+}
+
+.tablet,
+.laptop {
+  display: none;
+}
+.mobile {
+  display: inline-block;
 }
 
 @media (min-width: 756px) {

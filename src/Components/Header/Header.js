@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
 
 import Menu from "../Menu/Menu";
 
@@ -20,7 +21,14 @@ const Header = () => {
               <i className="icons icon--email"></i>raf02041994@gmail.com
             </a>
           </div>
-          <div className="userInfo">{session.token && <p className="userInfo__name">{session.token && session.user.name ? session.user.name : "No Name"}</p>}</div>
+          <div className="userInfo">
+            {session.token && (
+              <>
+                <p className="userInfo__name">{session.token && session.user.name ? session.user.name : "No Name"}</p>
+                <Avatar alt="Remy Sharp" src={session.user.photoUrl} />
+              </>
+            )}
+          </div>
         </div>
       </div>
       <Menu />

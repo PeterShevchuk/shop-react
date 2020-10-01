@@ -12,9 +12,6 @@
   text-transform: uppercase;
 }
 
-.addItem__item-select {
-  /* padding: 5px 10px; */
-}
 .addItem__item-select > * {
   padding: 5px;
   cursor: pointer;

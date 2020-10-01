@@ -4,7 +4,7 @@
 
 .loader {
   position: fixed;
-  z-index: 9999;
+  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.9);
   top: 0;
   bottom: 0;
@@ -13,4 +13,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error {
+  position: fixed;
+  z-index: 9999;
+  width: 300px;
+  height: 200px;
+  margin: 20px;
+  padding: 10px;
+  background-color: #ec3040;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
 }

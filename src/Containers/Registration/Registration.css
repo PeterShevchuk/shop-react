@@ -25,3 +25,17 @@
   padding: 20px;
   font-size: 20px;
 }
+.registration__input-poster {
+  margin-bottom: 20px;
+  color: #747474;
+  padding: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgb(118, 118, 118);
+  align-items: center;
+  border-radius: 2px;
+}
+.registration__input-poster > *:first-child {
+  margin-right: 10px;
+}

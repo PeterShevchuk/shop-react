@@ -36,12 +36,14 @@ const globalSlice = createSlice({
 
 const initialStateData = {
   items: [],
+  upDate: 0,
 };
 const dataSlice = createSlice({
   name: "data",
   initialState: initialStateData,
   reducers: {
     setItemsState: (state, { payload }) => ({ ...state, items: payload }),
+    setUpDate: (state, { payload }) => ({ ...state, upDate: payload }),
   },
 });
 
@@ -52,4 +54,4 @@ export const global = globalSlice.reducer;
 export const { Loader, setErrorState } = globalSlice.actions;
 
 export const data = dataSlice.reducer;
-export const { setItemsState } = dataSlice.actions;
+export const { setItemsState, setUpDate } = dataSlice.actions;

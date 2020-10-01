@@ -17,12 +17,19 @@
   display: inline-flex;
   text-decoration: unset;
 }
-
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+.userInfo {
+  display: flex;
+  align-items: center;
+}
 .userInfo > * {
   display: inline-block;
 }
 .userInfo__name {
-  margin-right: 10px;
+  display: none;
 }
 .userInfo__loginOut {
   cursor: pointer;
@@ -70,4 +77,15 @@
 }
 .icon--basker:hover {
   background-image: url("../../img/icons/basket-hover.png");
+}
+
+@media (min-width: 748px) {
+  .contact {
+    align-items: center;
+    flex-direction: row;
+  }
+  .userInfo__name {
+    margin-right: 10px;
+    display: inline-block;
+  }
 }

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setItem } from "../../operations";
 import { storage } from "../../config";
 import { setErrorState } from "../../Redux/Slice";
 
 import { seasons, category } from "../../Addons/cat";
-import { rundomNum } from "../../Addons/func";
+import { rundomNum, randomString, fixArrayFiles } from "../../Addons/func";
+import { nameFolderForImagesItems } from "../../Addons/vars";
 
 import "./AddItem.css";
-const nameFolderForImagesItems = "product";
 const initialState = {
   title: "",
-  poster: "",
+  images: [],
   price: "",
   rate: rundomNum(5),
-  sex: "male",
-  season: "",
+  sex: "unisex",
+  season: seasons[0],
   category: "",
   sale: false,
   priceNew: "",
@@ -27,27 +27,63 @@ const AddItem = () => {
   const [progress, setProgress] = useState();
 
   const dispatch = useDispatch();
-  const inputHolderFile = (e) => {
-    if (!e.target.files[0]) {
+
+  const { user } = useSelector((state) => state.session);
+
+  const inputHolderFile = async ({ target }) => {
+    await setUserInfo({ ...userInfo, images: [] });
+    if (!target.files.length) {
       return;
     }
-    const link = nameFolderForImagesItems + "/" + Date.now() + e.target.files[0].name;
-    let uploadTask = storage.ref().child(link).put(e.target.files[0], { contentType: e.target.files[0].type });
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100),
-      (error) => dispatch(setErrorState(error)),
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => setUserInfo({ ...userInfo, poster: downloadURL }));
-      }
-    );
+    const folderName = randomString();
+    const arrayFilesUrl = [];
+    fixArrayFiles(target.files).map(async (item) => {
+      const uploadTask = storage.ref().child(`${nameFolderForImagesItems}/${folderName}/${Date.now()}${item.name}`).put(item);
+      await uploadTask.on(
+        "state_changed",
+        (snapshot) => setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100),
+        (error) => dispatch(setErrorState(error)),
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            arrayFilesUrl.push(downloadURL);
+          });
+        }
+      );
+    });
+    setUserInfo({ ...userInfo, images: arrayFilesUrl });
   };
   const inputHolder = ({ target }) => {
     setUserInfo({ ...userInfo, [target.name]: target.value });
   };
   const onSubmit = () => {
-    dispatch(setItem({ ...userInfo, date: Date.now() }));
+    if (checkAdd()) {
+      return;
+    }
+    dispatch(setItem({ ...userInfo, date: Date.now(), authorName: user.name, authorUid: user.uid }));
     setUserInfo(initialState);
+  };
+  const checkAdd = () => {
+    const { title, images, price, category } = userInfo;
+    if (title === "" && title === " ") {
+      setError("Error! Title is null");
+      return true;
+    }
+    if (images === "") {
+      setError("Error! No poster");
+      return true;
+    }
+    if (price === "") {
+      setError("Error! No price");
+      return true;
+    }
+    if (category === "") {
+      setError("Error! Choose category");
+      return true;
+    }
+    return false;
+  };
+  const setError = (mess) => {
+    dispatch(setErrorState({ message: mess }));
   };
   return (
     <>
@@ -59,7 +95,7 @@ const AddItem = () => {
         <div className="addItem__item">
           <p className="addItem__label">Category</p>
           <select className="addItem__item-select" size="8" multiple name="category" onChange={inputHolder}>
-            {category.map((item) => (
+            {category.sort().map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -96,6 +132,9 @@ const AddItem = () => {
             <label>
               Yes <input type="radio" name="sale" value={true} onClick={inputHolder} />
             </label>
+            <label>
+              TOP <input type="radio" name="sale" value={"top"} onClick={inputHolder} />
+            </label>
             <input className="addItem__input" type="text" name="priceNew" placeholder="New price" onChange={inputHolder} value={userInfo.priceNew} />
           </div>
         </div>
@@ -107,7 +146,10 @@ const AddItem = () => {
           <p className="addItem__label">Sex</p>
           <div className="addItem__input-radio">
             <label>
-              Men <input type="radio" name="sex" value="male" defaultChecked={true} onClick={inputHolder} />
+              Unisex <input type="radio" name="sex" value="unisex" defaultChecked={true} onClick={inputHolder} />
+            </label>
+            <label>
+              Men <input type="radio" name="sex" value="male" onClick={inputHolder} />
             </label>
             <label>
               Women <input type="radio" name="sex" value="female" onClick={inputHolder} />

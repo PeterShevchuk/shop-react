@@ -1,61 +1,82 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import imgTest from "../../img/content/saleTop1.png";
+import { fixTimer } from "../../Addons/func";
+import { navigation } from "../../Addons/vars";
+
+import AddButton from "../Cart/AddButton/AddButton";
+
 import "./TopSale.css";
 
 const TopSale = () => {
   const [timer, setTimer] = useState({ day: 0, hour: 0, min: 0, sec: 0 });
+  const { items } = useSelector((state) => state.data);
+  const infoItem = items.find((item) => item.sale === "top");
 
-  const innerTimer = () => {
-    let time = Date.now() - new Date("Dec 1, 2020");
-    setTimer({
-      day: fix(Math.floor(time / (1000 * 60 * 60 * 24))),
-      hour: fix(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
-      min: fix(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))),
-      sec: fix(Math.floor((time % (1000 * 60)) / 1000)),
-    });
+  const isDate = Date.now() - (infoItem.date + 36000000);
+  useEffect(() => {
+    const innerTimer = async () => {
+      await setTimer({
+        day: fixTimer(Math.floor(isDate / (1000 * 60 * 60 * 24))),
+        hour: fixTimer(Math.floor((isDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+        min: fixTimer(Math.floor((isDate % (1000 * 60 * 60)) / (1000 * 60))),
+        sec: fixTimer(Math.floor((isDate % (1000 * 60)) / 1000)),
+      });
+    };
+    if (isDate < 0) {
+      const interval = setInterval(innerTimer, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isDate]);
+
+  const history = useHistory();
+
+  const redirectToDetailsItem = () => {
+    history.push(`${navigation.shop}/${infoItem.id}`);
   };
-  const fix = (num) => {
-    num = Math.sign(num) === -1 ? num * -1 : num;
-    return String(num < 10 && num >= 0 ? "0" + num : num);
-  };
-  setInterval(innerTimer, 1000);
   return (
-    <div className="saleTop">
-      <div></div>
-      <div className="container saleTop__content">
-        <div>
-          <p className="saleTop__sale">Sale</p>
-          <p className="saleTop__title">
-            Deal of the Day <br />
-            30% on Dresses
-          </p>
-          <img className="saleTop__image mobile tablet" src={imgTest} alt="" width="900" height="1000" />
-          <p className="saleTop__name">Pretty Thing Floral Skater Dress</p>
-          <p className="saleTop__price">$30.50</p>
-          <div className="saleTop__timer">
-            <div className="saleTop__timer-day">
-              <p className="saleTop__timer-number">{timer.day}</p>
-              <p className="saleTop__timer-char">day</p>
-            </div>
-            <div className="saleTop__timer-hour">
-              <p className="saleTop__timer-number">{timer.hour}</p>
-              <p className="saleTop__timer-char">hours</p>
-            </div>
-            <div className="saleTop__timer-min">
-              <p className="saleTop__timer-number">{timer.min}</p>
-              <p className="saleTop__timer-char">minutes</p>
-            </div>
-            <div className="saleTop__timer-sec">
-              <p className="saleTop__timer-number">{timer.sec}</p>
-              <p className="saleTop__timer-char">seconds</p>
+    <>
+      {isDate < 0 && (
+        <div className="saleTop">
+          <div className="container saleTop__content">
+            <div>
+              <p className="saleTop__sale">Sale</p>
+              <p className="saleTop__title">
+                Deal of the Day <br />
+                30% on <br />
+                {infoItem.category}
+              </p>
+              <img className="saleTop__image mobile tablet" src={infoItem.images[0]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
+              <p className="saleTop__name" onClick={redirectToDetailsItem}>
+                {infoItem.title}
+              </p>
+              <p className="saleTop__price">${infoItem.priceNew}</p>
+              <div className="saleTop__timer">
+                <div className="saleTop__timer-day">
+                  <p className="saleTop__timer-number">{timer.day}</p>
+                  <p className="saleTop__timer-char">day</p>
+                </div>
+                <div className="saleTop__timer-hour">
+                  <p className="saleTop__timer-number">{timer.hour}</p>
+                  <p className="saleTop__timer-char">hours</p>
+                </div>
+                <div className="saleTop__timer-min">
+                  <p className="saleTop__timer-number">{timer.min}</p>
+                  <p className="saleTop__timer-char">minutes</p>
+                </div>
+                <div className="saleTop__timer-sec">
+                  <p className="saleTop__timer-number">{timer.sec}</p>
+                  <p className="saleTop__timer-char">seconds</p>
+                </div>
+              </div>
+              <AddButton id={infoItem.id} addClass="saleTop__add" />
             </div>
           </div>
-          <button className="btn saleTop__add">Add to Cart</button>
+          <img className="saleTop__image laptop" src={infoItem.images[0]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
         </div>
-      </div>
-      <img className="saleTop__image laptop" src={imgTest} alt="" width="900" height="1000" />
-    </div>
+      )}
+    </>
   );
 };
 

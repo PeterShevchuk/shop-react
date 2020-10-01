@@ -1,9 +1,18 @@
 .profile {
-  margin: 0 200px;
-  display: grid;
-  grid-template-columns: 400px 1fr;
+  display: flex;
+  justify-content: center;
+  max-width: 320px;
+  flex-wrap: wrap;
 }
 
 .profile__info > * {
   margin-bottom: 10px;
+}
+
+@media (min-width: 756px) {
+  .profile {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    max-width: 756px;
+  }
 }

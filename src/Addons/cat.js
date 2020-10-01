@@ -1,6 +1,7 @@
-export const seasons = ["spring", "summer", "autumn", "winter"];
+export const seasons = ["none", "spring", "summer", "autumn", "winter"];
 export const category = [
   "belt",
+  "backpack",
   "blouse",
   "bikini",
   "coat",

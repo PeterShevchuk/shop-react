@@ -8,6 +8,8 @@
   width: auto;
   max-height: 1000px;
   margin-bottom: 80px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 .saleTop__content {
   margin: 0 auto;
@@ -30,6 +32,7 @@
   font-size: 56px;
   font-weight: 600;
   margin-bottom: 80px;
+  cursor: pointer;
 }
 .saleTop__name {
   font-size: 24px;
@@ -94,5 +97,10 @@
   .saleTop__content {
     max-width: 100%;
     text-align: left;
+  }
+}
+@media (min-width: 1440px) {
+  .saleTop {
+    max-height: 1000px;
   }
 }

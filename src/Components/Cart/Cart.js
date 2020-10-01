@@ -24,9 +24,9 @@ const Cart = () => {
         <div className="cart__list">
           <ul className="cart__left-list">
             {cart.map((item) => (
-              <li className="cart__item" key={item.id}>
+              <li className="cart__item" key={"cart" + item.id}>
                 <div className="cart__poster">
-                  <img src={item.poster} alt={item.title} />
+                  <img src={item.images[0]} alt={item.title} />
                 </div>
                 <div className="cart__info">
                   <h2 className="cart__title">
@@ -57,11 +57,11 @@ const Cart = () => {
                     <button className="btn" onClick={() => dispatch(addCountCartItem(item.id))}>
                       +
                     </button>
-                    <button disabled={item.count <= 1 ? true : false} className="btn" onClick={() => (item.count <= 1 ? dispatch(removeItemCart(item.id)) : dispatch(removeCountCartItem(item.id)))}>
+                    <h3 className="cart__count-text">{item.count}</h3>
+                    <button disabled={item.count <= 1 ? true : false} className="btn" onClick={() => dispatch(removeCountCartItem(item.id))}>
                       -
                     </button>
                   </div>
-                  <h3 className="cart__count-text">{item.count}</h3>
                   <button className="btn" onClick={() => dispatch(removeItemCart(item.id))}>
                     Remove
                   </button>

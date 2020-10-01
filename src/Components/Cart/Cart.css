@@ -42,12 +42,16 @@
 .cart__count {
   text-align: center;
   display: flex;
-  /* flex-direction: column; */
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .cart__count-btns {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart__count-btns > button:disabled {
+  background-color: #cccccc;
+  cursor: auto;
 }
 .cart__total {
   display: grid;
@@ -63,6 +67,9 @@
   .cart__count {
     align-items: center;
     grid-column: 1/3;
+  }
+  .cart__count-text {
+    min-width: 50px;
   }
 }
 @media (min-width: 756px) {
