@@ -6,7 +6,7 @@ import { navigation } from "../../Addons/vars";
 import "./Menu.css";
 
 const Menu = () => {
-  const { token, user } = useSelector((state) => state.session);
+  const { token, user, cart } = useSelector((state) => state.session);
   return (
     <div className="container">
       <nav className="nav">
@@ -65,7 +65,8 @@ const Menu = () => {
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={navigation.cart} className="nav-menu__item">
+              <NavLink to={navigation.cart} className="nav-menu__item cart">
+                {cart.length > 0 && <div className="nav-menu__cart-count">{cart.length}</div>}
                 <i className="icons icon--basker"></i>
               </NavLink>
             </li>

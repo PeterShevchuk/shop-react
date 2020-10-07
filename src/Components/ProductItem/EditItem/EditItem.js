@@ -34,13 +34,13 @@ const EditItem = ({ open, close, array }) => {
     dispatch(editItem({ ...itemInfo, edit: { date: Date.now(), authorName: user.name, authorUid: user.uid } }));
   };
   const checkAdd = () => {
-    const { title, images, price, category } = itemInfo;
+    const { title, images, price, category, season } = itemInfo;
     if (title === "" && title === " ") {
       setError("Error! Title is null");
       return true;
     }
     if (images === "") {
-      setError("Error! No images");
+      setError("Error! No poster");
       return true;
     }
     if (price === "") {
@@ -49,6 +49,10 @@ const EditItem = ({ open, close, array }) => {
     }
     if (category === "") {
       setError("Error! Choose category");
+      return true;
+    }
+    if (season.length > 0) {
+      setError("Error! Season must be one value");
       return true;
     }
     return false;

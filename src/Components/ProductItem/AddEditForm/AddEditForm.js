@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-
 import { useDispatch } from "react-redux";
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Rating from "@material-ui/lab/Rating";
+
+import { storage } from "../../../config";
+import { setErrorState } from "../../../Redux/Slice";
 
 import { seasons, category, sex } from "../../../Addons/cat";
-import { setErrorState } from "../../../Redux/Slice";
-import { storage } from "../../../config";
 import { randomString, fixArrayFiles } from "../../../Addons/func";
 import { nameFolderForImagesItems } from "../../../Addons/vars";
-import Icons from "../../Icons/Icons";
 
+import Icons from "../../Icons/Icons";
 import "./AddEditForm.css";
 const AddEditForm = ({ itemInfo, setItemInfo }) => {
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
-  const inputHolder = ({ target }) => {
-    let value = target.name === "sale" || target.name === "sex" ? Number(target.value) : target.value;
+  const inputHolder = ({ target }, newValue) => {
+    let value = target.name === "sale" || target.name === "sex" || target.name === "rate" ? Number(target.value) : target.value;
     setItemInfo({ ...itemInfo, [target.name]: value });
   };
 
@@ -27,7 +35,7 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
   };
 
   const changeBasicPoster = (index) => {
-    document.querySelector(".addItem__item-image--active").classList.remove("addItem__item-image--active");
+    document.querySelector(".form__item-image--active").classList.remove("form__item-image--active");
     setItemInfo({ ...itemInfo, imageBasic: Number(index) });
   };
 
@@ -62,25 +70,60 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
     });
     setItemInfo({ ...itemInfo, folderName, images: arrayFilesUrl });
   };
+
   return (
     <>
       <div className="form__item">
         <p className="form__label">Title item</p>
-        <input className="form__input" type="text" name="title" onChange={inputHolder} value={itemInfo.title} />
+        {/* <input className="form__input" type="text" name="title" onChange={inputHolder} value={itemInfo.title} /> */}
+        <TextField label="Title" name="title" variant="outlined" value={itemInfo.title} onChange={inputHolder} />
       </div>
       <div className="form__item">
         <p className="form__label">Category</p>
-        <select className="form__item-select" size="1" name="category" onChange={inputHolder} defaultValue={itemInfo.category}>
-          {category.sort().map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
+        <FormControl variant="outlined">
+          <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
+          <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="category" value={itemInfo.category} onChange={inputHolder} label="Category">
+            {category.sort().map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <div className="form__item">
+        <p className="form__label">Price</p>
+        <TextField label="Price" name="price" variant="outlined" onChange={inputHolder} value={itemInfo.price} />
+      </div>
+      <div className="form__item">
+        <p className="form__label">Sale</p>
+        <div className="form__input-sale">
+          <label>
+            No <input type="radio" name="sale" value={1} defaultChecked={itemInfo.sale === 1} onClick={inputHolder} />
+          </label>
+          <label>
+            Yes <input type="radio" name="sale" value={2} defaultChecked={itemInfo.sale === 2} onClick={inputHolder} />
+          </label>
+          <label>
+            TOP <input type="radio" name="sale" value={3} defaultChecked={itemInfo.sale === 3} onClick={inputHolder} />
+          </label>
+          <TextField label="New price" name="priceNew" disabled={itemInfo.sale === 1} variant="outlined" onChange={inputHolder} value={itemInfo.priceNew} />
+          {/* <input className="form__input" type="text" name="priceNew" disabled={itemInfo.sale === 1} placeholder="New price" onChange={inputHolder} value={itemInfo.priceNew} /> */}
+        </div>
+      </div>
+      <div className="form__item">
+        <p className="form__label">Sex</p>
+        <div className="form__input-radio">
+          {sex.map((item) => (
+            <label key={item}>
+              {item} <input type="radio" name="sex" value={sex.indexOf(item)} defaultChecked={itemInfo.sex === sex.indexOf(item)} onClick={inputHolder} />
+            </label>
           ))}
-        </select>
+        </div>
       </div>
       <div className="form__item">
         <p className="form__label">Season</p>
-        <div>
+        <div className="form__checkbox-seasons">
           {seasons.map((item) => (
             <FormControlLabel key={item} control={<Checkbox color="secondary" checked={itemInfo.season && Boolean(itemInfo.season.find((itemS) => itemS === item))} onChange={changeSeason} name={item} />} label={item} />
           ))}
@@ -90,7 +133,8 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
         <p className="form__label">Poster</p>
         <div className="form__item-poster">
           <input type="file" name="file" multiple="multiple" accept="image/png,image/jpeg" onChange={inputHolderFile} />
-          <progress className="form__progress" max="100" value={progress}></progress>
+          <CircularProgress variant="static" value={progress} />
+          {/* <progress className="form__progress" max="100" value={progress}></progress> */}
         </div>
       </div>
       {itemInfo.images.length > 0 && (
@@ -112,38 +156,18 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
           </ul>
         </div>
       )}
-      <div className="form__item">
-        <p className="form__label">Price</p>
-        <input className="form__input" type="text" name="price" onChange={inputHolder} value={itemInfo.price} />
-      </div>
-      <div className="form__item">
-        <p className="form__label">Sale</p>
-        <div className="form__input-sale">
-          <label>
-            No <input type="radio" name="sale" value={1} defaultChecked={itemInfo.sale === 1} onClick={inputHolder} />
-          </label>
-          <label>
-            Yes <input type="radio" name="sale" value={2} defaultChecked={itemInfo.sale === 2} onClick={inputHolder} />
-          </label>
-          <label>
-            TOP <input type="radio" name="sale" value={3} defaultChecked={itemInfo.sale === 3} onClick={inputHolder} />
-          </label>
-          <input className="form__input" type="text" name="priceNew" disabled={itemInfo.sale === 1} placeholder="New price" onChange={inputHolder} value={itemInfo.priceNew} />
-        </div>
-      </div>
+
       <div className="form__item">
         <p className="form__label">Rate</p>
-        <input className="form__input" type="range" name="rate" min="1" max="5" onChange={inputHolder} value={itemInfo.rate} />
-      </div>
-      <div className="form__item">
-        <p className="form__label">Sex</p>
-        <div className="form__input-radio">
-          {sex.map((item) => (
-            <label key={item}>
-              {item} <input type="radio" name="sex" value={sex.indexOf(item)} defaultChecked={itemInfo.sex === sex.indexOf(item)} onClick={inputHolder} />
-            </label>
-          ))}
-        </div>
+        {/* <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                      setValue(newValue);
+                  }}
+              /> */}
+        <Rating name="rate" value={itemInfo.rate} size="large" onChange={inputHolder} />
+        {/* <input className="form__input" type="range" name="rate" min="1" max="5" onChange={inputHolder} value={itemInfo.rate} /> */}
       </div>
     </>
   );

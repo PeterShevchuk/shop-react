@@ -1,5 +1,4 @@
 .form__item {
-  text-align: right;
   display: grid;
   grid-template-columns: 20% 80%;
   align-items: center;
@@ -16,7 +15,11 @@
 .form__item-select > *:hover {
   background-color: khaki;
 }
-.form__item-poster > div:first-child {
+.form__checkbox-seasons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.form__item-poster {
   display: flex;
   justify-content: space-between;
   align-items: center;

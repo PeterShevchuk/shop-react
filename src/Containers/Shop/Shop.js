@@ -4,12 +4,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import ProductItem from "../../Components/ProductItem/ProductItem";
-import { seasons } from "../../Addons/cat";
+import { seasons, sex } from "../../Addons/cat";
 
 import "./Shop.css";
 const initialState = {
   season: [],
-  category: [],
+  sex: [],
 };
 
 const Shop = () => {
@@ -20,13 +20,13 @@ const Shop = () => {
     checked[cat].find((i) => i === target.name) ? (newArray = newArray.filter((i) => i !== target.name)) : newArray.push(target.name);
     setChecked({ ...checked, [cat]: newArray });
   };
+
   const filterItems = () => {
     let newArr = [];
-    checked.season.length &&
-      checked.season.forEach((season) => {
-        newArr = [...newArr, ...items.filter((item) => item.season.find((itemf) => itemf === season))];
-      });
-    return checked.season.length ? newArr : items;
+    let newArrSex = [];
+    checked.season.length && checked.season.forEach((season) => (!newArr.length ? (newArr = items.filter((item) => item.season.find((itemf) => itemf === season))) : (newArr = [...new Set([...newArr, ...items.filter((item) => item.season.find((itemf) => itemf === season))])])));
+    checked.sex.length && checked.sex.forEach((sexItem) => (newArrSex = [...new Set([...newArrSex, ...(newArr.length ? newArr : items).filter((item) => item.sex === sex.indexOf(sexItem))])]));
+    return checked.season.length || checked.sex.length ? (newArrSex.length ? newArrSex : newArr) : items;
   };
   return (
     <div className="container shop">
@@ -35,6 +35,12 @@ const Shop = () => {
         <div className="shop__filter-checkeds">
           {seasons.map((item) => (
             <FormControlLabel key={item} control={<Checkbox color="secondary" checked={checked.season && Boolean(checked.season.find((itemS) => itemS === item))} onChange={(e) => handleChange(e, "season")} name={item} />} label={item} />
+          ))}
+        </div>
+        <h2>Sex</h2>
+        <div className="shop__filter-checkeds">
+          {sex.map((item) => (
+            <FormControlLabel key={item} control={<Checkbox color="secondary" checked={checked.sex && Boolean(checked.sex.find((itemS) => itemS === item))} onChange={(e) => handleChange(e, "sex")} name={item} />} label={item} />
           ))}
         </div>
         {/* <h2>Catrgory</h2>

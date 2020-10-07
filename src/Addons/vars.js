@@ -15,7 +15,6 @@ export const navigation = {
   sale: "/shop/sale",
   addItem: "/shop/add",
   featured: "/shop/featured",
-  edit: "/edit",
 
   // Other
   contact: "/contact",

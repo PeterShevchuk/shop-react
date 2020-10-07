@@ -10,6 +10,26 @@
   text-decoration: none;
   transition: all 0.1s linear;
 }
+.nav-menu__item.cart {
+  position: relative;
+}
+.nav-menu__cart-count {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -20px;
+  right: 1px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #000000;
+  padding: 0 5px;
+  border: 2px solid #eaac00;
+  background-color: #eaac00;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nav-menu__item.active {
   color: #eaac00;
 }

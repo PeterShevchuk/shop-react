@@ -37,7 +37,7 @@ const AddItem = () => {
     setItemInfo(initialState);
   };
   const checkAdd = () => {
-    const { title, images, price, category } = itemInfo;
+    const { title, images, price, category, season } = itemInfo;
     if (title === "" && title === " ") {
       setError("Error! Title is null");
       return true;
@@ -52,6 +52,10 @@ const AddItem = () => {
     }
     if (category === "") {
       setError("Error! Choose category");
+      return true;
+    }
+    if (season.length > 0) {
+      setError("Error! Season must be one value");
       return true;
     }
     return false;
