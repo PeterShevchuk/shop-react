@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -25,9 +27,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .container {
-  /* max-width: 320px; */
   min-width: 320px;
   margin: 0 auto;
+  padding: 0 5px;
 }
 
 .btn {
@@ -69,6 +71,7 @@ code {
     display: inline-block;
   }
   .container {
+    padding: 0;
     max-width: 756px;
   }
 }

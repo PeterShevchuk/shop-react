@@ -1,0 +1,86 @@
+.form__item {
+  text-align: right;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.form__item-select > * {
+  padding: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  /* margin-bottom: 5px; */
+}
+.form__item-select > *:hover {
+  background-color: khaki;
+}
+.form__item-poster > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form__item-image {
+  width: 130px;
+  height: auto;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  background-color: #ffffff;
+  position: relative;
+}
+.form__item-image > img {
+  width: 100%;
+  height: auto;
+}
+
+.form__item-image:hover {
+  border: 1px solid rgb(255, 159, 159);
+  transform: scale(1.1);
+}
+
+.form__item-image--active {
+  border: 1px solid rgb(255, 159, 159);
+}
+.form__item-poster-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.form__label {
+  padding-right: 20px;
+}
+.form__input {
+  display: block;
+  padding: 10px;
+  font-size: 20px;
+}
+.form__input-radio,
+.form__input-sale {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.form__input-radio > label,
+.form__input-sale > label {
+  cursor: pointer;
+}
+.form__input-sale {
+  justify-content: space-between;
+  padding-left: 50px;
+}
+.form__submit {
+  padding: 20px;
+  font-size: 20px;
+  width: 50%;
+}
+
+.form__progress {
+  width: 50%;
+}
+.form__item-image-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

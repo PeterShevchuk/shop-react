@@ -63,6 +63,13 @@
 .cart__total > *:nth-child(even) {
   text-align: center;
 }
+.cart__noItems {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+}
 @media (max-width: 755px) {
   .cart__count {
     align-items: center;

@@ -7,6 +7,7 @@ import { dateParse } from "../../Addons/func";
 import { userSingOut } from "../../operations";
 
 import "./Profile.css";
+
 const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.session);
@@ -20,6 +21,8 @@ const Profile = () => {
         <p>ID: {user.uid}</p>
         <p>Date registered: {dateParse(user.date)}</p>
         {user.phoneNumber && <p>Phone: {user.phoneNumber}</p>}
+        <p>Email: {user.email}</p>
+        {<p>Type: {user.admin ? "Admin" : "User"}</p>}
 
         <NavLink to={navigation.prof + "/" + user.uid}>
           <button className="btn userInfo__loginOut" onClick={() => dispatch(userSingOut())}>

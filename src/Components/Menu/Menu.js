@@ -55,7 +55,7 @@ const Menu = () => {
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={token ? navigation.prof : navigation.reg} className="nav-menu__item">
+              <NavLink to={token ? navigation.prof : navigation.login} className="nav-menu__item">
                 <i className="icons icon--user"> </i>
               </NavLink>
             </li>

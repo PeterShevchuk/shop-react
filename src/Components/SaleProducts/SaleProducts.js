@@ -10,7 +10,7 @@ import { navigation } from "../../Addons/vars";
 const SaleProducts = ({ count = null }) => {
   const products = useSelector((state) => state.data.items);
 
-  const productsFiltered = products.length ? products.filter((item) => item.sale) : [];
+  const productsFiltered = products.length ? products.filter((item) => item.sale !== 1) : [];
   // console.log(productsFiltered);
 
   return (

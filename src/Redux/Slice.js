@@ -22,15 +22,19 @@ const sessionSlice = createSlice({
 });
 
 const initialStateGlobal = {
-  loader: false,
+  loader: true,
   error: null,
+  success: null,
+  modal: false,
 };
 const globalSlice = createSlice({
   name: "global",
   initialState: initialStateGlobal,
   reducers: {
-    Loader: (state, { payload }) => ({ ...state, loader: payload }),
+    setLoader: (state, { payload }) => ({ ...state, loader: payload }),
     setErrorState: (state, { payload }) => ({ ...state, error: payload }),
+    setSuccess: (state, { payload }) => ({ ...state, success: payload }),
+    setModal: (state, { payload }) => ({ ...state, success: payload }),
   },
 });
 
@@ -43,6 +47,9 @@ const dataSlice = createSlice({
   initialState: initialStateData,
   reducers: {
     setItemsState: (state, { payload }) => ({ ...state, items: payload }),
+    addItemState: (state, { payload }) => ({ ...state, items: [...state.items, payload] }),
+    removeItemState: (state, { payload }) => ({ ...state, items: state.items.filter((item) => item.id !== payload) }),
+    editItemState: (state, { payload }) => ({ ...state, items: state.items.map((item) => (item.id === payload.id ? payload : item)) }),
     setUpDate: (state, { payload }) => ({ ...state, upDate: payload }),
   },
 });
@@ -51,7 +58,7 @@ export const session = sessionSlice.reducer;
 export const { setError, setToken, setUserInfo, loginOut, setItemCart, removeItemCart, addCountCartItem, removeCountCartItem } = sessionSlice.actions;
 
 export const global = globalSlice.reducer;
-export const { Loader, setErrorState } = globalSlice.actions;
+export const { setLoader, setErrorState, setSuccess, setModal } = globalSlice.actions;
 
 export const data = dataSlice.reducer;
-export const { setItemsState, setUpDate } = dataSlice.actions;
+export const { setItemsState, setUpDate, removeItemState, editItemState, addItemState } = dataSlice.actions;

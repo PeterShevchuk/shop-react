@@ -1,0 +1,8 @@
+.editItem__editWindow-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.editItem__editWindow-btns-delete {
+  margin-right: auto;
+}

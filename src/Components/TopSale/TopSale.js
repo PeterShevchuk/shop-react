@@ -14,7 +14,7 @@ const TopSale = () => {
   const { items } = useSelector((state) => state.data);
   const infoItem = items.find((item) => item.sale === "top");
 
-  const isDate = Date.now() - (infoItem.date + 36000000);
+  const isDate = infoItem.date ? Date.now() - (infoItem.date + 36000000) : -1;
   useEffect(() => {
     const innerTimer = async () => {
       await setTimer({

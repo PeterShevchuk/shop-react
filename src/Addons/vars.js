@@ -2,6 +2,7 @@ export const navigation = {
   // Global
   home: "/",
   search: "/search",
+  redirect: "/",
 
   // User
   login: "/login",
@@ -14,6 +15,7 @@ export const navigation = {
   sale: "/shop/sale",
   addItem: "/shop/add",
   featured: "/shop/featured",
+  edit: "/edit",
 
   // Other
   contact: "/contact",

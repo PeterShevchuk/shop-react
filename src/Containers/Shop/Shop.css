@@ -1,0 +1,15 @@
+.shop {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+.shop__filter {
+  padding: 0 10px;
+  /* border: 1px solid #ccc; */
+}
+.shop__filter-checkeds {
+  margin-left: 20px;
+}
+.shop__filter-checkeds > label {
+  display: block;
+  margin: 0;
+}

@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { dateParse } from "../../Addons/func";
+import { navigation } from "../../Addons/vars";
 
-import { dbUsers } from "../../operations";
-import { Loader } from "../../Redux/Slice";
+import { dbUsers, userSingOut } from "../../operations";
 import NotFound from "../NotFound/NotFound";
+import { setLoader } from "../../Redux/Slice";
 import "./ProfileID.css";
 const ProfileID = () => {
-  const [userInfo, setUseInfo] = useState(false);
+  const [userInfo, setUserInfo] = useState(false);
   const { user, token } = useSelector((state) => state.session);
   const userSearchId = useParams().id;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Loader(true));
-    const fetchData = async () => {
+    async function fetchData() {
+      await dispatch(setLoader(true));
       const response = await dbUsers.doc(userSearchId).get();
       if (response.data()) {
         const { name, uid, photoUrl, date } = response.data();
-        setUseInfo({ name, uid, photoUrl, date });
+        setUserInfo({ name, uid, photoUrl, date });
       }
-    };
+      await dispatch(setLoader(false));
+    }
 
     fetchData();
-    dispatch(Loader(false));
   }, [userSearchId, dispatch]);
   return (
     <>
@@ -33,11 +34,18 @@ const ProfileID = () => {
             <img src={userInfo.photoUrl} width="300" height="300" alt={userInfo.name} />
           </div>
           <div className="profile__info">
+            <h1>
+              {userInfo.name} {token && userSearchId === userInfo.uid && <span>(You)</span>}
+            </h1>
             <p>ID: {userInfo.uid}</p>
-            <p>
-              Name: {userInfo.name} {token && userSearchId === user.uid && <span>(You)</span>}
-            </p>
             <p>Date registered: {dateParse(userInfo.date)}</p>
+            {token && userSearchId === user.uid && (
+              <NavLink to={navigation.prof + "/" + user.uid}>
+                <button className="btn userInfo__loginOut" onClick={() => dispatch(userSingOut())}>
+                  login Out
+                </button>
+              </NavLink>
+            )}
           </div>
         </div>
       ) : (

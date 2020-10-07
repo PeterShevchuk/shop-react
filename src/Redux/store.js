@@ -13,6 +13,7 @@ const persistConfig = {
   storage,
   whitelist: ["session", "data"],
 };
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const rootMiddleWares = applyMiddleware(...middleWares);
 // const compose = composeWithDevTools(rootMiddleWares)
