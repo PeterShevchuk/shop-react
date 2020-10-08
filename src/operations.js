@@ -1,4 +1,8 @@
-import { db, auth, userData } from "./config";
+import {
+  db,
+  auth,
+  // userData
+} from "./config";
 
 import { setToken, setUserInfo, loginOut, setItemsState, setErrorState, setLoader, setSuccess, removeItemState, editItemState, addItemState } from "./Redux/Slice";
 
@@ -123,12 +127,12 @@ export const subscribe = (email) => async (dispatch) => {
   }
 };
 
-export const userChangeName = (name, userId) => async (dispatch) => {
-  userData
-    .ref("users/" + userId)
-    .set({
-      username: name,
-    })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err));
-};
+// export const userChangeName = (name, userId) => async (dispatch) => {
+//   userData
+//     .ref("users/" + userId)
+//     .set({
+//       username: name,
+//     })
+//     .then((response) => console.log(response))
+//     .catch((err) => console.log(err));
+// };

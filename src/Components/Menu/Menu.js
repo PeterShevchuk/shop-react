@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { navigation } from "../../Addons/vars";
 import Icons from "../Icons/Icons";
 
 import "./Menu.css";
 
 const Menu = () => {
+  const location = useLocation();
   const { token, user, cart } = useSelector((state) => state.session);
   return (
     <div className="container">
@@ -24,17 +25,17 @@ const Menu = () => {
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={navigation.shop} exact className="nav-menu__item">
+              <NavLink to={navigation.shop} exact={location.pathname === navigation.sale || location.pathname === navigation.featured || location.pathname === navigation.cart || location.pathname === navigation.addItem} className="nav-menu__item">
                 shop
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={navigation.sale} exact className="nav-menu__item">
+              <NavLink to={navigation.sale} className="nav-menu__item">
                 Sale
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={navigation.featured} exact className="nav-menu__item">
+              <NavLink to={navigation.featured} className="nav-menu__item">
                 featured
               </NavLink>
             </li>
@@ -56,7 +57,7 @@ const Menu = () => {
               </NavLink>
             </li>
             <li className="nav-menu__list">
-              <NavLink to={token ? navigation.prof : navigation.login} className="nav-menu__item">
+              <NavLink to={token ? navigation.prof : navigation.login} exact={location.pathname === navigation.login || location.pathname === navigation.reg || location.pathname === navigation.prof} className="nav-menu__item">
                 <Icons.Profile />
               </NavLink>
             </li>

@@ -1,33 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import queryString from "query-string";
 
 import ProductItem from "../../Components/ProductItem/ProductItem";
 import { seasons, sex } from "../../Addons/cat";
 
 import "./Shop.css";
+
 const initialState = {
   season: [],
   sex: [],
 };
-
 const Shop = () => {
   const { items } = useSelector((state) => state.data);
   const [checked, setChecked] = useState(initialState);
-  const handleChange = ({ target }, cat) => {
+  const history = useHistory();
+  const location = useLocation();
+  const handleChange = async ({ target }, cat) => {
     let newArray = checked[cat];
     checked[cat].find((i) => i === target.name) ? (newArray = newArray.filter((i) => i !== target.name)) : newArray.push(target.name);
-    setChecked({ ...checked, [cat]: newArray });
+    let allArray = { ...checked, [cat]: newArray };
+    setChecked(allArray);
+    const searchString =
+      (allArray.season.length || allArray.sex.length) &&
+      `?${Object.keys(allArray)
+        .map((nameKey) => (allArray[nameKey].length ? nameKey + "=" + allArray[nameKey].map((item) => item) : null))
+        .join("&")}`;
+    history.push({ ...location, search: searchString });
   };
 
   const filterItems = () => {
     let newArr = [];
     let newArrSex = [];
-    checked.season.length && checked.season.forEach((season) => (!newArr.length ? (newArr = items.filter((item) => item.season.find((itemf) => itemf === season))) : (newArr = [...new Set([...newArr, ...items.filter((item) => item.season.find((itemf) => itemf === season))])])));
-    checked.sex.length && checked.sex.forEach((sexItem) => (newArrSex = [...new Set([...newArrSex, ...(newArr.length ? newArr : items).filter((item) => item.sex === sex.indexOf(sexItem))])]));
-    return checked.season.length || checked.sex.length ? (newArrSex.length ? newArrSex : newArr) : items;
+    checked.season && checked.season.length && checked.season.forEach((season) => (!newArr.length ? (newArr = items.filter((item) => item.season.find((itemf) => itemf === season))) : (newArr = [...new Set([...newArr, ...items.filter((item) => item.season.find((itemf) => itemf === season))])])));
+    checked.sex && checked.sex.length && checked.sex.forEach((sexItem) => (newArrSex = [...new Set([...newArrSex, ...(newArr.length ? newArr : items).filter((item) => item.sex === sex.indexOf(sexItem))])]));
+    return (checked.season && checked.season.length) || (checked.sex && checked.sex.length) ? (newArrSex.length ? newArrSex : newArr) : items;
   };
+
+  useEffect(() => {
+    let parse = queryString.parse(location.search);
+    if (Object.keys(parse).length) {
+      const test = { ...initialState };
+      Object.keys(parse).forEach((item) => parse[item] && (test[item] = parse[item].split(",")));
+      setChecked(test);
+    }
+  }, [location.search]);
   return (
     <div className="container shop">
       <div className="shop__filter">

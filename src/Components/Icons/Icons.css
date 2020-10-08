@@ -1,6 +1,11 @@
 .svg {
   transition: all 0.2s linear;
 }
+
+.active > .svg {
+  fill: #eaac00;
+}
+
 .svg:hover {
   fill: #eaac00;
 }
