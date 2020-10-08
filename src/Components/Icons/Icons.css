@@ -1,6 +1,11 @@
-.svg-Close {
+.svg {
   transition: all 0.2s linear;
 }
-.svg-Close:hover {
-  fill: rgb(255, 159, 159);
+.svg:hover {
+  fill: #eaac00;
+}
+
+.svg.Tel,
+.svg.Mail {
+  margin-right: 10px;
 }

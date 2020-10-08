@@ -51,7 +51,7 @@ const EditItem = ({ open, close, array }) => {
       setError("Error! Choose category");
       return true;
     }
-    if (season.length > 0) {
+    if (season.length <= 0) {
       setError("Error! Season must be one value");
       return true;
     }

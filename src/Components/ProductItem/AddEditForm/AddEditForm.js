@@ -156,18 +156,13 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
           </ul>
         </div>
       )}
-
+      {/* <div className="form__item">
+        <p className="form__label">Size</p>
+        <ul className="form__item-size"></ul>
+      </div> */}
       <div className="form__item">
         <p className="form__label">Rate</p>
-        {/* <Rating
-                  name="simple-controlled"
-                  value={value}
-                  onChange={(event, newValue) => {
-                      setValue(newValue);
-                  }}
-              /> */}
         <Rating name="rate" value={itemInfo.rate} size="large" onChange={inputHolder} />
-        {/* <input className="form__input" type="range" name="rate" min="1" max="5" onChange={inputHolder} value={itemInfo.rate} /> */}
       </div>
     </>
   );

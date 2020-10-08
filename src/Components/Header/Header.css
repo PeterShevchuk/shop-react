@@ -40,45 +40,9 @@
   font-weight: 700;
   font-size: 18px;
 }
-.icons {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  transition: all 0.1s linear;
+.contact > *:hover > .svg {
+  fill: #eaac00;
 }
-.icon--tel {
-  background-image: url("../../img/icons/tel.png");
-}
-.contact__tel:hover > .icon--tel {
-  background-image: url("../../img/icons/tel-hover.png");
-}
-.icon--email {
-  background-image: url("../../img/icons/mail.png");
-}
-.contact__mail:hover > .icon--email {
-  background-image: url("../../img/icons/mail-hover.png");
-}
-.icon--user {
-  background-image: url("../../img/icons/user.png");
-}
-.icon--user:hover {
-  background-image: url("../../img/icons/user-hover.png");
-}
-.icon--search {
-  background-image: url("../../img/icons/search.png");
-}
-.icon--search:hover {
-  background-image: url("../../img/icons/search-hover.png");
-}
-.icon--basker {
-  background-image: url("../../img/icons/basket.png");
-}
-.icon--basker:hover {
-  background-image: url("../../img/icons/basket-hover.png");
-}
-
 @media (min-width: 748px) {
   .contact {
     align-items: center;

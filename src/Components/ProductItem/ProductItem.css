@@ -34,12 +34,6 @@
   height: auto;
   margin-bottom: 24px;
 }
-.product__rate {
-  width: 120px;
-  height: 24px;
-  background-image: url("../../img/icons/star.png");
-  margin: 0 auto 24px;
-}
 .product__name {
   font-weight: 500;
   margin-bottom: 24px;

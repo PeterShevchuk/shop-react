@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { navigation } from "../../Addons/vars";
+import Icons from "../Icons/Icons";
 
 import "./Menu.css";
 
@@ -56,18 +57,18 @@ const Menu = () => {
             </li>
             <li className="nav-menu__list">
               <NavLink to={token ? navigation.prof : navigation.login} className="nav-menu__item">
-                <i className="icons icon--user"> </i>
+                <Icons.Profile />
               </NavLink>
             </li>
             <li className="nav-menu__list">
               <NavLink to={navigation.search} className="nav-menu__item">
-                <i className="icons icon--search"> </i>
+                <Icons.Search />
               </NavLink>
             </li>
             <li className="nav-menu__list">
               <NavLink to={navigation.cart} className="nav-menu__item cart">
                 {cart.length > 0 && <div className="nav-menu__cart-count">{cart.length}</div>}
-                <i className="icons icon--basker"></i>
+                <Icons.Cart />
               </NavLink>
             </li>
           </ul>

@@ -1,5 +1,10 @@
 export const seasons = ["spring", "summer", "autumn", "winter"];
 export const sex = ["Unisex", "Man", "Woman", "Сhildren"];
+export const size = [
+  [38, 45],
+  [34, 42],
+  [25, 36],
+];
 export const category = [
   "belt",
   "backpack",

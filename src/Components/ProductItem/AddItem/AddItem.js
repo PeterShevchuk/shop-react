@@ -21,6 +21,7 @@ const initialState = {
   priceNew: "",
   imageBasic: 0,
   folderName: "",
+  size: [],
 };
 
 const AddItem = () => {
