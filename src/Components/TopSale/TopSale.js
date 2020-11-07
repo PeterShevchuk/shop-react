@@ -12,9 +12,8 @@ import "./TopSale.css";
 const TopSale = () => {
   const [timer, setTimer] = useState({ day: 0, hour: 0, min: 0, sec: 0 });
   const { items } = useSelector((state) => state.data);
-  const infoItem = items.find((item) => item.sale === "top");
-
-  const isDate = infoItem.date ? Date.now() - (infoItem.date + 36000000) : -1;
+  const infoItem = items.length > 0 && items.find((item) => item.sale === "top");
+  const isDate = infoItem && infoItem.date ? Date.now() - (infoItem.date + 36000000) : -1;
   useEffect(() => {
     const innerTimer = async () => {
       await setTimer({
@@ -47,7 +46,7 @@ const TopSale = () => {
                 30% on <br />
                 {infoItem.category}
               </p>
-              <img className="saleTop__image mobile tablet" src={infoItem.images[0]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
+              <img className="saleTop__image mobile tablet" src={infoItem.images[infoItem.imageBasic]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
               <p className="saleTop__name" onClick={redirectToDetailsItem}>
                 {infoItem.title}
               </p>
@@ -73,7 +72,7 @@ const TopSale = () => {
               <AddButton id={infoItem.id} addClass="saleTop__add" />
             </div>
           </div>
-          <img className="saleTop__image laptop" src={infoItem.images[0]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
+          <img className="saleTop__image laptop" src={infoItem.images[infoItem.imageBasic]} alt={infoItem.title} width="900" height="1000" onClick={redirectToDetailsItem} />
         </div>
       )}
     </>

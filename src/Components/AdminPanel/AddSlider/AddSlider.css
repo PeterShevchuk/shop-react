@@ -1,0 +1,19 @@
+.addSlider {
+  text-align: center;
+}
+
+.addSlider__delete {
+  position: absolute;
+}
+.addSliders img {
+  height: 50vh;
+}
+.addItem__submit {
+  margin-bottom: 50px;
+  text-align: center;
+}
+.addSlider__select-img {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: middle;
+}

@@ -46,8 +46,8 @@ const Menu = () => {
             </li> */}
             {token && user.admin && (
               <li className="nav-menu__list">
-                <NavLink to={navigation.addItem} className="nav-menu__item">
-                  ADD
+                <NavLink to={navigation.admin} className="nav-menu__item">
+                  ADMIN
                 </NavLink>
               </li>
             )}

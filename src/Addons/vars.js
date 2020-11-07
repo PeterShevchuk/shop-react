@@ -13,16 +13,21 @@ export const navigation = {
   shop: "/shop",
   cart: "/shop/cart",
   sale: "/shop/sale",
-  addItem: "/shop/add",
   featured: "/shop/featured",
 
   // Other
   contact: "/contact",
+
+  // Admin
+  admin: "/admin",
+  addItem: "/admin/add",
+  addSlider: "/admin/slider",
 };
 
 // Folders for save image
 export const nameFolderForImagesItems = "product";
 export const nameFolderForUserPoster = "users";
+export const nameFolderForSliderImages = "slider";
 
 // Update data time (ms)
 export const upDateDataTime = 3600000;

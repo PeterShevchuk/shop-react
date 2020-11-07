@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 
 import { dateParse, fixedPrice } from "../../../Addons/func";
@@ -13,14 +13,16 @@ import EditItem from "../EditItem/EditItem";
 const ItemsDetails = () => {
   const { user, token } = useSelector((state) => state.session);
   const { items } = useSelector((state) => state.data);
+
   const [itemInfo, setItemInfo] = useState({ images: [""] });
   const [basicImage, setBasicImage] = useState(itemInfo && itemInfo.images ? itemInfo.images[itemInfo.imageBasic] : null);
   const [modalEdit, setModalEdit] = useState(false);
+
+  const history = useHistory();
   const itemDetailsID = useParams().id;
+
   const viewImage = ({ target }) => {
-    if (itemInfo.images.length <= 0 || target.src === basicImage) {
-      return;
-    }
+    if (itemInfo.images.length <= 0 || target.src === basicImage) return;
     document.querySelector(".itemDetails__image--active").classList.remove("itemDetails__image--active");
     target.parentNode.classList.add("itemDetails__image--active");
     setBasicImage(target.src);
@@ -29,11 +31,15 @@ const ItemsDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const foundObj = items.find((item) => item.id === itemDetailsID);
+      if (!foundObj) {
+        history.push("/shop");
+        return;
+      }
       setItemInfo(foundObj);
       setBasicImage(foundObj.images[foundObj.imageBasic]);
     };
     fetchData();
-  }, [itemDetailsID, items]);
+  }, [itemDetailsID, items, history]);
   return (
     <div className="container itemDetails">
       {itemInfo && (

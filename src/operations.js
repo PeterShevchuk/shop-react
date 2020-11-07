@@ -4,13 +4,40 @@ import {
   // userData
 } from "./config";
 
-import { setToken, setUserInfo, loginOut, setItemsState, setErrorState, setLoader, setSuccess, removeItemState, editItemState, addItemState } from "./Redux/Slice";
+import { setToken, setUserInfo, loginOut, setItemsState, setErrorState, setLoader, setSuccess, removeItemState, editItemState, addItemState, setSliderArray } from "./Redux/Slice";
 
 export const dbItems = db.collection("items");
 export const dbItemsDelete = db.collection("itemsDeleted");
 export const dbUsers = db.collection("users");
 export const dbSubs = db.collection("subscribe");
+export const dbInfo = db.collection("info");
 
+// SLIDER
+export const getSliderArray = () => async (dispatch) => {
+  dispatch(setLoader(true));
+  try {
+    const result = await dbInfo.doc("slider").get();
+    dispatch(setSliderArray(result.data().items));
+  } catch (error) {
+    dispatch(setErrorState(error));
+  } finally {
+    dispatch(setLoader(false));
+  }
+};
+
+export const postSliderArray = (data) => async (dispatch) => {
+  dispatch(setLoader(true));
+  try {
+    await dbInfo.doc("slider").set({ items: data });
+    dispatch(setSliderArray(data));
+  } catch (error) {
+    dispatch(setErrorState(error));
+  } finally {
+    dispatch(setLoader(false));
+  }
+};
+
+// PRODUCTS
 export const setItem = (data) => async (dispatch) => {
   dispatch(setLoader(true));
   try {
@@ -62,6 +89,7 @@ export const getItems = () => async (dispatch) => {
   }
 };
 
+// USER SING, OUT, INFO
 export const userSingUp = ({ email, password, phoneNumber, name, photoUrl }) => async (dispatch) => {
   dispatch(setLoader(true));
   try {
@@ -115,6 +143,7 @@ export const getUserInfo = (uid) => async (dispatch) => {
   }
 };
 
+// OTHER
 export const subscribe = (email) => async (dispatch) => {
   dispatch(setLoader(true));
   try {

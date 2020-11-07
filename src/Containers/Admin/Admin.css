@@ -1,0 +1,21 @@
+.admin {
+  width: 100vw;
+  background-color: linen;
+  padding: 50px 0;
+}
+
+.admin__container {
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 200px 800px;
+  margin: 0 auto;
+}
+.admin__container > main {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 20px 10px;
+}
+.admin__container .active > * {
+  background-color: #cccccc;
+}

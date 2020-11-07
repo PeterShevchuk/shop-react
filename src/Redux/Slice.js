@@ -41,6 +41,7 @@ const globalSlice = createSlice({
 const initialStateData = {
   items: [],
   upDate: 0,
+  slider: [],
 };
 const dataSlice = createSlice({
   name: "data",
@@ -51,6 +52,7 @@ const dataSlice = createSlice({
     removeItemState: (state, { payload }) => ({ ...state, items: state.items.filter((item) => item.id !== payload) }),
     editItemState: (state, { payload }) => ({ ...state, items: state.items.map((item) => (item.id === payload.id ? payload : item)) }),
     setUpDate: (state, { payload }) => ({ ...state, upDate: payload }),
+    setSliderArray: (state, { payload }) => ({ ...state, slider: payload }),
   },
 });
 
@@ -61,4 +63,4 @@ export const global = globalSlice.reducer;
 export const { setLoader, setErrorState, setSuccess, setModal } = globalSlice.actions;
 
 export const data = dataSlice.reducer;
-export const { setItemsState, setUpDate, removeItemState, editItemState, addItemState } = dataSlice.actions;
+export const { setItemsState, setUpDate, removeItemState, editItemState, addItemState, setSliderArray } = dataSlice.actions;

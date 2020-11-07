@@ -6,7 +6,7 @@ const AddonBanner = () => {
     <div className="container fashionshop">
       <p className="fashionshop__title">This is Fashionshop</p>
       <p className="fashionshop__text">Your fashion and style destination</p>
-      <a href="/" className="fashionshop__button">
+      <a href="/shop?&sex=Woman" className="fashionshop__button">
         shop For Women
       </a>
     </div>

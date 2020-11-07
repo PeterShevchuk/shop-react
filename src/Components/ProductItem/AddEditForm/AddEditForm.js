@@ -47,9 +47,9 @@ const AddEditForm = ({ itemInfo, setItemInfo }) => {
 
   const inputHolderFile = async ({ target }) => {
     await setItemInfo({ ...itemInfo, images: [] });
-    if (!target.files.length) {
-      return;
-    }
+
+    if (!target.files.length) return;
+
     const folderName = randomString();
     const arrayFilesUrl = [];
     fixArrayFiles(target.files).map(async (item) => {

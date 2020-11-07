@@ -1,8 +1,14 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import rootReducer from "./index.js";
+import { session, global, data } from "./Slice";
+
+const rootReducer = combineReducers({
+  session,
+  global,
+  data,
+});
 
 const middleWares = [thunk];
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddEditForm from "../AddEditForm/AddEditForm";
+import AddEditForm from "../../ProductItem/AddEditForm/AddEditForm";
 
 import { setItem } from "../../../operations";
 import { setErrorState } from "../../../Redux/Slice";
